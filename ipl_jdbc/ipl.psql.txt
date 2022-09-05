@@ -1,0 +1,35 @@
+/*Question-1*/
+SELECT season,count(*) AS noOfMatchPlayed
+FROM matches
+GROUP BY season
+ORDER BY season; 
+
+/*Question-2*/
+SELECT winner AS team,COUNT(winner) AS totalMatchWon
+FROM matches
+GROUP BY team
+ORDER BY totalMatchWon DESC
+LIMIT 14;
+
+/*Question-3*/
+SELECT bowling_team AS team,SUM(extra_runs) AS extraRunsConceded
+FROM deleveries
+WHERE match_id IN (SELECT id FROM matches
+WHERE season='2016')
+GROUP BY team;
+
+/*Question-4*/
+SELECT bowler AS bowlerName,SUM(total_runs)/(COUNT(bowler)/6.0) AS BowlerEconomy
+FROM deleveries
+WHERE match_id IN (SELECT id FROM matches
+WHERE season='2015')
+GROUP BY bowlerName
+ORDER BY BowlerEconomy;
+
+/Question-5
+*team who won highest number of toss*/
+SELECT toss_winner AS tossWinner,COUNT(*) AS NoOfTimesTossWon
+FROM matches
+GROUP BY tossWwinner
+ORDER BY tossWwinner
+LIMIT 1;
